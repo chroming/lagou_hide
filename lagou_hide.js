@@ -8,13 +8,22 @@
 // @grant        none
 // @require      http://code.jquery.com/jquery-1.11.0.min.js
 // ==/UserScript==
-var id_list = ['3917781', '2561733'];
+var position_list = ['3917781', '2561733'];
 var company_list = ['83552', '154789'];
+
+
+append_list = function(id, id_list){
+    console.log(id_list);
+    id_list.push(id);
+};
+
 $(function(){
     $('.con_list_item').each(function(){
         var p = $(this).attr('data-positionid');
         var c = $(this).attr('data-companyid');
-        if (id_list.includes(p)||company_list.includes(c)){
+        $(this).find('.p_top').append('<button type="button" onclick="append_list(p, position_list)">隐藏职位</button>');
+        $(this).find('.company_name').append('<button type="button" onclick="append_list(c, company_list)">隐藏公司</button>');
+        if (position_list.includes(p)||company_list.includes(c)){
             $(this).hide();
             console.log('hide:'+c);
         }
