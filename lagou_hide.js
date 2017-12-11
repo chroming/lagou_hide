@@ -8,7 +8,9 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_listValues
+// @grant        GM_notification
 // @require      http://code.jquery.com/jquery-1.11.0.min.js
+
 // ==/UserScript==
 
 var position_list = JSON.parse(GM_getValue('lagou_hide_pl')||'[]');
@@ -18,11 +20,15 @@ append_list = function(id, tag){
     if (tag === true){
         position_list.push(id.toString());
         GM_setValue('lagou_hide_pl', JSON.stringify(position_list));
+        GM_notification(text='职位已隐藏', timeout='1');
+
     }
     else {
         company_list.push(id.toString());
         GM_setValue('lagou_hide_cl', JSON.stringify(company_list));
+        GM_notification(text='公司已隐藏', timeout='1');
     }
+    window.location.reload();
 };
 
 $(function(){
