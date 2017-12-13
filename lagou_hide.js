@@ -31,7 +31,7 @@ append_list = function(id, tag){
     window.location.reload();
 };
 
-$(function(){
+var main = function(){
     $('.con_list_item').each(function(){
         var p = $(this).attr('data-positionid');
         var c = $(this).attr('data-companyid');
@@ -40,8 +40,17 @@ $(function(){
             console.log('hide:'+c);
         }
         else{
-        $(this).find('.p_top').append('<button type="button" onclick="append_list('+p+', true)">隐藏职位</button>');
-        $(this).find('.company_name').append('<button type="button" onclick="append_list('+c+', false)">隐藏公司</button>');
-        }
+            if ($(this).find('.p_top .hide_button').length === 0) {
+                $(this).find('.p_top').append('<button class="hide_button" type="button" onclick="append_list('+p+', true)">隐藏职位</button>');
+                $(this).find('.company_name').append('<button type="button" onclick="append_list('+c+', false)">隐藏公司</button>');
+        }}
     });
-});
+};
+$('.pager_container [hidefocus]').each($(this).click(
+    function(){
+        //$(document).ajaxComplete(main);
+        setTimeout(main, 1000);
+    }
+
+));
+$(main);
